@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma UTP - Gestión Técnico Pedagógica & Cargas Horarias 2027</title>
+    
+    <!-- Google Fonts Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- CSS Institucional -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <div id="app-container">
+        
+        <!-- SIDEBAR LATERAL PERSISTENTE -->
+        <aside id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">UTP</div>
+                <div>
+                    <div class="sidebar-title">Plataforma UTP</div>
+                    <div class="sidebar-subtitle">Gestión Escolar Chile 2027</div>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section-title">Módulos Principales</div>
+                
+                <a class="nav-item active" data-module="modulo1" onclick="App.navigateTo('modulo1')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    <span>1. Tiempos y Horarios</span>
+                </a>
+
+                <a class="nav-item" data-module="modulo2" onclick="App.navigateTo('modulo2')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                    <span>2. Acompañamiento UTP</span>
+                </a>
+
+                <a class="nav-item" data-module="modulo3" onclick="App.navigateTo('modulo3')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    <span>3. Agenda & Audio</span>
+                </a>
+
+                <a class="nav-item" data-module="modulo4" onclick="App.navigateTo('modulo4')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                    <span>4. Centro Doc. & Alumnos</span>
+                </a>
+
+                <div class="nav-section-title" id="nav-section-admin" style="margin-top:1rem;">Administración</div>
+                <a class="nav-item" id="nav-item-admin" data-module="modulo_admin" onclick="App.navigateTo('modulo_admin')" style="display:none; color:var(--warning-amber);">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    <span>👑 Máster & Auditoría</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div><strong>SimoHora / UTP v5.3</strong></div>
+                <div>Leyes 20.903 & 21.625</div>
+                <button class="btn btn-sm btn-secondary" style="margin-top:0.5rem; width:100%; text-align:center;" onclick="App.resetAllData()">
+                    🔄 Restablecer Datos
+                </button>
+            </div>
+        </aside>
+
+        <!-- MAIN WRAPPER -->
+        <div id="main-wrapper">
+            
+            <!-- NAVBAR SUPERIOR CON DROPDOWN PERFIL -->
+            <header id="navbar">
+                <div class="navbar-left">
+                    <div class="module-title-display" id="current-module-title">
+                        Módulo 1: Gestión de Tiempos y Horarios
+                    </div>
+                </div>
+
+                <div class="navbar-right">
+                    <!-- Dropdown Selector de Perfil -->
+                    <div class="profile-selector-wrapper">
+                        <div class="profile-badge" id="profile-badge-btn">
+                            <div class="profile-avatar" id="navbar-avatar">CM</div>
+                            <div class="profile-info">
+                                <div class="profile-role" id="navbar-role">Prof. Claudia Morales</div>
+                                <div class="profile-subtext" id="navbar-subtext">Perfil: Jefe UTP</div>
+                            </div>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+                        </div>
+
+                        <div class="profile-dropdown-menu" id="profile-dropdown-menu">
+                            <div class="dropdown-item" data-role="Administrador" onclick="App.switchProfile('Administrador', 'Director Pedro Valenzuela', 'admin@simohora.cl', 'PV')">
+                                <div>
+                                    <strong>Administrador / Sostenedor</strong>
+                                    <div style="font-size:0.7rem; color:var(--text-secondary);">Acceso total & Auditoría</div>
+                                </div>
+                            </div>
+                            <div class="dropdown-item active" data-role="UTP" onclick="App.switchProfile('UTP', 'Prof. Claudia Morales', 'utp@colegio.cl', 'CM')">
+                                <div>
+                                    <strong>Jefe UTP / Equipo Técnico</strong>
+                                    <div style="font-size:0.7rem; color:var(--text-secondary);">Acompañamiento y Cargas</div>
+                                </div>
+                            </div>
+                            <div class="dropdown-item" data-role="Docente" onclick="App.switchProfile('Docente', 'María José Fernández', 'docente@colegio.cl', 'MF')">
+                                <div>
+                                    <strong>Perfil Docente</strong>
+                                    <div style="font-size:0.7rem; color:var(--text-secondary);">Consulta de horario y bitácoras</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- CONTENIDO PRINCIPAL -->
+            <main id="content-area">
+                <!-- Se carga dinámicamente mediante JS -->
+            </main>
+
+        </div>
+
+    </div>
+
+    <!-- SCRIPTS MODULARES JS -->
+    <script src="js/dataStore.js"></script>
+    <script src="js/modules/modulo1_horarios.js"></script>
+    <script src="js/modules/modulo2_monitoreo.js"></script>
+    <script src="js/modules/modulo3_agenda.js"></script>
+    <script src="js/modules/modulo4_documentos_estudiantes.js"></script>
+    <script src="js/modules/modulo_admin.js"></script>
+    <script src="js/app.js"></script>
+
+</body>
+</html>
