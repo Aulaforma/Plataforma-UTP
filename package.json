@@ -1,0 +1,20 @@
+{
+  "name": "plataforma-utp",
+  "version": "5.3.0",
+  "description": "Plataforma Web de Gestión Técnico Pedagógica & Cargas Horarias 2027",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx serve .",
+    "build": "echo 'Static build ready'",
+    "start": "npx serve ."
+  },
+  "keywords": [
+    "utp",
+    "cargas-horarias",
+    "ley-20903",
+    "ley-21625",
+    "gestion-escolar"
+  ],
+  "author": "Aulaforma",
+  "license": "MIT"
+}
